@@ -369,8 +369,9 @@ namespace SiGen.UI
 
         private void RenderFrets(Graphics g)
         {
-            Pen fretPen = null;
-            Pen nutPen = GetPen(1, DisplayConfig.Frets);
+            // Use thin blue lines for all frets for professional construction templates
+            Pen fretPen = GetPen(Color.Blue, 1.5f, false);
+            Pen nutPen = GetPen(Color.Blue, 1.5f, false);
             Font fretNumFont = GetFont(8f);
             var textSize = g.MeasureString("30", fretNumFont);
             
@@ -379,17 +380,18 @@ namespace SiGen.UI
                 Alignment = IsHorizontal ? StringAlignment.Center : StringAlignment.Far,
             };
 
+            // Override display config to always use blue lines for construction
             switch (DisplayConfig.Frets.RenderMode)
             {
                 default:
                 case LineRenderMode.PlainLine:
-                    fretPen = GetPen(1, DisplayConfig.Frets);
+                    fretPen = GetPen(Color.Blue, 1.5f, false);
                     break;
                 case LineRenderMode.RealWidth:
-                    fretPen = GetPen(DisplayConfig.Frets.Color, DisplayConfig.Frets.RenderWidth);
+                    fretPen = GetPen(Color.Blue, 1.5f, false);
                     break;
                 case LineRenderMode.RealisticLook:
-                    fretPen = GetPen(Color.DarkGray, DisplayConfig.Frets.RenderWidth);
+                    fretPen = GetPen(Color.Blue, 1.5f, false);
                     break;
             }
             

@@ -9,6 +9,7 @@ namespace SiGen.StringedInstruments.Layout
     public enum StringSpacingType
     {
         Simple,
-        Manual
+        Manual,
+        FixedWidth
     }
 }

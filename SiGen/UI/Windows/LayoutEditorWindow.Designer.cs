@@ -36,6 +36,8 @@
             this.tssbOpen = new System.Windows.Forms.ToolStripSplitButton();
             this.tsmiOpenFile = new System.Windows.Forms.ToolStripMenuItem();
             this.tsmiOpenTemplate = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNew4StringBass = new System.Windows.Forms.ToolStripMenuItem();
+            this.tsmiNew5StringBass = new System.Windows.Forms.ToolStripMenuItem();
             this.tsSeparatorOpen = new System.Windows.Forms.ToolStripSeparator();
             this.tssbSave = new System.Windows.Forms.ToolStripSplitButton();
             this.tsmiSave = new System.Windows.Forms.ToolStripMenuItem();
@@ -105,6 +107,8 @@
             this.tssbOpen.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiOpenFile,
             this.tsmiOpenTemplate,
+            this.tsmiNew4StringBass,
+            this.tsmiNew5StringBass,
             this.tsSeparatorOpen});
             this.tssbOpen.Image = global::SiGen.Properties.Resources.OpenLayout_x32;
             resources.ApplyResources(this.tssbOpen, "tssbOpen");
@@ -122,6 +126,18 @@
             // 
             this.tsmiOpenTemplate.Name = "tsmiOpenTemplate";
             resources.ApplyResources(this.tsmiOpenTemplate, "tsmiOpenTemplate");
+            // 
+            // tsmiNew4StringBass
+            // 
+            this.tsmiNew4StringBass.Name = "tsmiNew4StringBass";
+            this.tsmiNew4StringBass.Text = "New 4-String Bass (34\" Scale)";
+            this.tsmiNew4StringBass.Click += new System.EventHandler(this.tsmiNew4StringBass_Click);
+            // 
+            // tsmiNew5StringBass
+            // 
+            this.tsmiNew5StringBass.Name = "tsmiNew5StringBass";
+            this.tsmiNew5StringBass.Text = "New 5-String Bass (35\" Scale)";
+            this.tsmiNew5StringBass.Click += new System.EventHandler(this.tsmiNew5StringBass_Click);
             // 
             // tsSeparatorOpen
             // 
@@ -274,6 +290,8 @@
         private System.Windows.Forms.ToolStripSplitButton tssbOpen;
         private System.Windows.Forms.ToolStripMenuItem tsmiOpenFile;
         private System.Windows.Forms.ToolStripMenuItem tsmiOpenTemplate;
+        private System.Windows.Forms.ToolStripMenuItem tsmiNew4StringBass;
+        private System.Windows.Forms.ToolStripMenuItem tsmiNew5StringBass;
         private System.Windows.Forms.ToolStripSeparator tsSeparatorOpen;
         private WeifenLuo.WinFormsUI.Docking.DockPanel dockPanel1;
         private System.Windows.Forms.ToolStripButton tsbOptions;

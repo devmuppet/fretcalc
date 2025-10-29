@@ -139,6 +139,8 @@ namespace SiGen.StringedInstruments.Layout
                         return SimpleStringSpacing;
                     case StringSpacingType.Manual:
                         return ManualStringSpacing;
+                    case StringSpacingType.FixedWidth:
+                        return FixedWidthStringSpacing;
                 }
             }
         }
@@ -146,6 +148,21 @@ namespace SiGen.StringedInstruments.Layout
 		public StringSpacingSimple SimpleStringSpacing { get; }
 
 		public StringSpacingManual ManualStringSpacing { get; }
+
+        private StringSpacingFixedWidth _FixedWidthStringSpacing;
+
+        /// <summary>
+        /// Fixed width string spacing manager
+        /// </summary>
+        public StringSpacingFixedWidth FixedWidthStringSpacing
+        {
+            get
+            {
+                if (_FixedWidthStringSpacing == null)
+                    _FixedWidthStringSpacing = new StringSpacingFixedWidth(this);
+                return _FixedWidthStringSpacing;
+            }
+        }
 
 		#endregion
 
@@ -906,6 +923,112 @@ namespace SiGen.StringedInstruments.Layout
         {
             var stream = typeof(SILayout).Assembly.GetManifestResourceStream("SiGen.Resources.DefaultLayout.sil");
             return Load(stream);
+        }
+
+        public static SILayout GenerateDefault4StringBass()
+        {
+            var layout = new SILayout();
+            
+            // Set basic properties
+            layout._NumberOfStrings = 4;
+            
+            // Add strings first (like in Load method)
+            for (int i = 0; i < layout.NumberOfStrings; i++)
+                layout._Strings.Add(new SIString(layout, i));
+            
+            layout.ScaleLengthMode = ScaleLengthType.Single;
+            layout.SingleScaleConfig.Length = Measure.Inches(34); // Standard bass scale length
+            layout.StringSpacingMode = StringSpacingType.FixedWidth;
+            
+            // Set FixedWidth properties for bass
+            layout.FixedWidthStringSpacing.FixedNutWidth = Measure.Mm(38);
+            layout.FixedWidthStringSpacing.NutMargin = Measure.Mm(3);
+            layout.FixedWidthStringSpacing.BridgeMargin = Measure.Mm(3);
+            
+            // Set bass string gauges (.045, .065, .085, .105) and frets
+            layout.Strings[0].Gauge = Measure.Inches(0.045); // G string
+            layout.Strings[0].NumberOfFrets = 24;
+            layout.Strings[1].Gauge = Measure.Inches(0.065); // D string
+            layout.Strings[1].NumberOfFrets = 24;
+            layout.Strings[2].Gauge = Measure.Inches(0.085); // A string 
+            layout.Strings[2].NumberOfFrets = 24;
+            layout.Strings[3].Gauge = Measure.Inches(0.105); // E string
+            layout.Strings[3].NumberOfFrets = 24;
+            
+            // Set bass tuning (G-D-A-E from high to low)
+            layout.Strings[0].Tuning = new StringTuning(MusicalNote.EqualNote(NoteName.G, 2));
+            layout.Strings[1].Tuning = new StringTuning(MusicalNote.EqualNote(NoteName.D, 2));
+            layout.Strings[2].Tuning = new StringTuning(MusicalNote.EqualNote(NoteName.A, 1));
+            layout.Strings[3].Tuning = new StringTuning(MusicalNote.EqualNote(NoteName.E, 1));
+            
+            // Set individual bridge spacing for 4-string bass after layout is initialized
+            layout.RebuildLayout(); // This initializes the spacing arrays
+            
+            // Now modify the BridgeSpacing arrays directly (arrays are mutable)
+            var bridgeSpacing = layout.FixedWidthStringSpacing.BridgeSpacing;
+            if (bridgeSpacing.Length >= 3)
+            {
+                bridgeSpacing[0] = Measure.Mm(17);
+                bridgeSpacing[1] = Measure.Mm(18);
+                bridgeSpacing[2] = Measure.Mm(18);
+            }
+            
+            return layout;
+        }
+
+        public static SILayout GenerateDefault5StringBass()
+        {
+            var layout = new SILayout();
+            
+            // Set basic properties
+            layout._NumberOfStrings = 5;
+            
+            // Add strings first (like in Load method)
+            for (int i = 0; i < layout.NumberOfStrings; i++)
+                layout._Strings.Add(new SIString(layout, i));
+                
+            layout.ScaleLengthMode = ScaleLengthType.Single;
+            layout.SingleScaleConfig.Length = Measure.Inches(35); // Longer scale for 5-string
+            layout.StringSpacingMode = StringSpacingType.FixedWidth;
+            
+            // Set FixedWidth properties for 5-string bass
+            layout.FixedWidthStringSpacing.FixedNutWidth = Measure.Mm(45); // Wider for 5 strings
+            layout.FixedWidthStringSpacing.NutMargin = Measure.Mm(3);
+            layout.FixedWidthStringSpacing.BridgeMargin = Measure.Mm(3);
+            
+            // Set 5-string bass gauges (.045, .065, .085, .105, .130) and frets
+            layout.Strings[0].Gauge = Measure.Inches(0.045); // G string
+            layout.Strings[0].NumberOfFrets = 24;
+            layout.Strings[1].Gauge = Measure.Inches(0.065); // D string
+            layout.Strings[1].NumberOfFrets = 24;
+            layout.Strings[2].Gauge = Measure.Inches(0.085); // A string 
+            layout.Strings[2].NumberOfFrets = 24;
+            layout.Strings[3].Gauge = Measure.Inches(0.105); // E string
+            layout.Strings[3].NumberOfFrets = 24;
+            layout.Strings[4].Gauge = Measure.Inches(0.130); // B string
+            layout.Strings[4].NumberOfFrets = 24;
+            
+            // Set 5-string bass tuning (G-D-A-E-B from high to low)
+            layout.Strings[0].Tuning = new StringTuning(MusicalNote.EqualNote(NoteName.G, 2));
+            layout.Strings[1].Tuning = new StringTuning(MusicalNote.EqualNote(NoteName.D, 2));
+            layout.Strings[2].Tuning = new StringTuning(MusicalNote.EqualNote(NoteName.A, 1));
+            layout.Strings[3].Tuning = new StringTuning(MusicalNote.EqualNote(NoteName.E, 1));
+            layout.Strings[4].Tuning = new StringTuning(MusicalNote.EqualNote(NoteName.B, 0));
+            
+            // Set individual bridge spacing for 5-string bass after layout is initialized
+            layout.RebuildLayout(); // This initializes the spacing arrays
+            
+            // Now modify the BridgeSpacing arrays directly (arrays are mutable)
+            var bridgeSpacing = layout.FixedWidthStringSpacing.BridgeSpacing;
+            if (bridgeSpacing.Length >= 4)
+            {
+                bridgeSpacing[0] = Measure.Mm(16);
+                bridgeSpacing[1] = Measure.Mm(17);
+                bridgeSpacing[2] = Measure.Mm(18);
+                bridgeSpacing[3] = Measure.Mm(18);
+            }
+            
+            return layout;
         }
     }
 }

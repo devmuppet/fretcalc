@@ -247,6 +247,7 @@
     <Compile Include="StringedInstruments\Layout\StringSpacing\StringSpacingAlignment.cs" />
     <Compile Include="StringedInstruments\Layout\StringSpacing\StringSpacingManager.cs" />
     <Compile Include="StringedInstruments\Layout\StringSpacing\StringSpacingSimple.cs" />
+    <Compile Include="StringedInstruments\Layout\StringSpacing\StringSpacingFixedWidth.cs" />
     <Compile Include="StringedInstruments\Layout\Visual\LayoutLine.cs" />
     <Compile Include="StringedInstruments\Layout\Visual\StringLine.cs" />
     <Compile Include="StringedInstruments\Layout\StringSpacing\StringSpacingManual.cs" />

@@ -150,8 +150,12 @@ namespace SiGen.StringedInstruments.Layout
 
         public virtual XElement Serialize(string elemName)
         {
+            string mode = "Manual"; // Default fallback
+            if (this is StringSpacingSimple) mode = "Simple";
+            else if (this.GetType().Name == "StringSpacingFixedWidth") mode = "FixedWidth";
+            
             var elem = new XElement(elemName,
-                new XAttribute("Mode", (this is StringSpacingSimple) ? "Simple" : "Manual"),
+                new XAttribute("Mode", mode),
                 new XAttribute("NutAlignment", NutAlignment),
                 StringSpreadAtNut.SerializeAsAttribute("StringSpreadAtNut"),
                 new XAttribute("BridgeAlignment", BridgeAlignment),

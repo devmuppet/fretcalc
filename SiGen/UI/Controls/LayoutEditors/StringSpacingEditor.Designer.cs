@@ -35,6 +35,8 @@
             this.mtbBridgeSpacing = new SiGen.UI.Controls.MeasureTextbox();
             this.mtbBridgeSpread = new SiGen.UI.Controls.MeasureTextbox();
             this.lblNutStringSpacing = new System.Windows.Forms.Label();
+            this.cboStringSpacingType = new System.Windows.Forms.ComboBox();
+            this.lblStringSpacingType = new System.Windows.Forms.Label();
             this.cboNutSpacingMethod = new System.Windows.Forms.ComboBox();
             this.lblNutSpacingMethod = new System.Windows.Forms.Label();
             this.lblNutTotalSpread = new System.Windows.Forms.Label();
@@ -50,11 +52,15 @@
             this.lblBridgeSpacingMethod = new System.Windows.Forms.Label();
             this.lblBridgeSpacing = new System.Windows.Forms.Label();
             this.lblBridgeSpacingAlignment = new System.Windows.Forms.Label();
+            this.tlpFixedWidthControls = new System.Windows.Forms.TableLayoutPanel();
+            this.lblIndividualBridgeSpacing = new System.Windows.Forms.Label();
+            this.tlpIndividualBridgeSpacing = new System.Windows.Forms.TableLayoutPanel();
             this.LocStrings = new SiGen.Localization.LocalizableStringList(this.components);
             this.Text_Spacing = new SiGen.Localization.LocalizableString(this.components);
             this.Text_AvgSpacing = new SiGen.Localization.LocalizableString(this.components);
             this.tlpNutSpacingAuto.SuspendLayout();
             this.tlpBridgeSpacingAuto.SuspendLayout();
+            this.tlpFixedWidthControls.SuspendLayout();
             this.SuspendLayout();
             // 
             // mtbNutSpacing
@@ -90,6 +96,25 @@
             resources.ApplyResources(this.lblNutStringSpacing, "lblNutStringSpacing");
             this.lblNutStringSpacing.Name = "lblNutStringSpacing";
             // 
+            // lblStringSpacingType
+            // 
+            this.lblStringSpacingType.AutoSize = true;
+            this.lblStringSpacingType.Location = new System.Drawing.Point(6, 9);
+            this.lblStringSpacingType.Name = "lblStringSpacingType";
+            this.lblStringSpacingType.Size = new System.Drawing.Size(95, 13);
+            this.lblStringSpacingType.TabIndex = 0;
+            this.lblStringSpacingType.Text = "String Spacing Type:";
+            // 
+            // cboStringSpacingType
+            // 
+            this.cboStringSpacingType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboStringSpacingType.FormattingEnabled = true;
+            this.cboStringSpacingType.Location = new System.Drawing.Point(107, 6);
+            this.cboStringSpacingType.Name = "cboStringSpacingType";
+            this.cboStringSpacingType.Size = new System.Drawing.Size(121, 21);
+            this.cboStringSpacingType.TabIndex = 1;
+            this.cboStringSpacingType.SelectedIndexChanged += new System.EventHandler(this.cboStringSpacingType_SelectedIndexChanged);
+            // 
             // cboNutSpacingMethod
             // 
             resources.ApplyResources(this.cboNutSpacingMethod, "cboNutSpacingMethod");
@@ -122,15 +147,18 @@
             // tlpNutSpacingAuto
             // 
             resources.ApplyResources(this.tlpNutSpacingAuto, "tlpNutSpacingAuto");
-            this.tlpNutSpacingAuto.Controls.Add(this.lblNutSpacingMethod, 0, 2);
-            this.tlpNutSpacingAuto.Controls.Add(this.lblNutSpacing, 0, 1);
-            this.tlpNutSpacingAuto.Controls.Add(this.cboNutSpacingMethod, 1, 2);
-            this.tlpNutSpacingAuto.Controls.Add(this.mtbNutSpacing, 1, 1);
-            this.tlpNutSpacingAuto.Controls.Add(this.mtbNutSpread, 2, 1);
-            this.tlpNutSpacingAuto.Controls.Add(this.lblNutTotalSpread, 2, 0);
-            this.tlpNutSpacingAuto.Controls.Add(this.lblNutStringSpacing, 1, 0);
-            this.tlpNutSpacingAuto.Controls.Add(this.cboNutSpacingAlignment, 1, 3);
-            this.tlpNutSpacingAuto.Controls.Add(this.lblNutSpacingAlignment, 0, 3);
+            this.tlpNutSpacingAuto.Location = new System.Drawing.Point(0, 35); // Move down to make room for StringSpacingType controls
+            this.tlpNutSpacingAuto.Controls.Add(this.lblStringSpacingType, 0, 0);
+            this.tlpNutSpacingAuto.Controls.Add(this.cboStringSpacingType, 1, 0);
+            this.tlpNutSpacingAuto.Controls.Add(this.lblNutSpacingMethod, 0, 3);
+            this.tlpNutSpacingAuto.Controls.Add(this.lblNutSpacing, 0, 2);
+            this.tlpNutSpacingAuto.Controls.Add(this.cboNutSpacingMethod, 1, 3);
+            this.tlpNutSpacingAuto.Controls.Add(this.mtbNutSpacing, 1, 2);
+            this.tlpNutSpacingAuto.Controls.Add(this.mtbNutSpread, 2, 2);
+            this.tlpNutSpacingAuto.Controls.Add(this.lblNutTotalSpread, 2, 1);
+            this.tlpNutSpacingAuto.Controls.Add(this.lblNutStringSpacing, 1, 1);
+            this.tlpNutSpacingAuto.Controls.Add(this.cboNutSpacingAlignment, 1, 4);
+            this.tlpNutSpacingAuto.Controls.Add(this.lblNutSpacingAlignment, 0, 4);
             this.tlpNutSpacingAuto.Name = "tlpNutSpacingAuto";
             // 
             // lblNutSpacing
@@ -141,6 +169,7 @@
             // cboNutSpacingAlignment
             // 
             resources.ApplyResources(this.cboNutSpacingAlignment, "cboNutSpacingAlignment");
+            this.tlpNutSpacingAuto.SetColumnSpan(this.cboStringSpacingType, 2);
             this.tlpNutSpacingAuto.SetColumnSpan(this.cboNutSpacingAlignment, 2);
             this.cboNutSpacingAlignment.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboNutSpacingAlignment.FormattingEnabled = true;
@@ -155,6 +184,7 @@
             // tlpBridgeSpacingAuto
             // 
             resources.ApplyResources(this.tlpBridgeSpacingAuto, "tlpBridgeSpacingAuto");
+            this.tlpBridgeSpacingAuto.Location = new System.Drawing.Point(0, 128); // Move down to make room for StringSpacingType controls (93 + 35 offset)
             this.tlpBridgeSpacingAuto.Controls.Add(this.cboBridgeSpacingAlignment, 1, 3);
             this.tlpBridgeSpacingAuto.Controls.Add(this.cboBridgeSpacingMethod, 1, 2);
             this.tlpBridgeSpacingAuto.Controls.Add(this.lblBridgeSpacingMethod, 0, 2);
@@ -212,10 +242,56 @@
             // 
             resources.ApplyResources(this.Text_AvgSpacing, "Text_AvgSpacing");
             // 
+            // tlpFixedWidthControls
+            // 
+            this.tlpFixedWidthControls.ColumnCount = 2;
+            this.tlpFixedWidthControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 120F));
+            this.tlpFixedWidthControls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpFixedWidthControls.Controls.Add(this.lblIndividualBridgeSpacing, 0, 0);
+            this.tlpFixedWidthControls.Controls.Add(this.tlpIndividualBridgeSpacing, 0, 1);
+            this.tlpFixedWidthControls.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tlpFixedWidthControls.Location = new System.Drawing.Point(0, 200);
+            this.tlpFixedWidthControls.Name = "tlpFixedWidthControls";
+            this.tlpFixedWidthControls.RowCount = 2;
+            this.tlpFixedWidthControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tlpFixedWidthControls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.AutoSize));
+            this.tlpFixedWidthControls.Size = new System.Drawing.Size(400, 100);
+            this.tlpFixedWidthControls.TabIndex = 20;
+            this.tlpFixedWidthControls.Visible = false;
+            // 
+            // lblIndividualBridgeSpacing
+            // 
+            this.lblIndividualBridgeSpacing.AutoSize = true;
+            this.lblIndividualBridgeSpacing.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tlpFixedWidthControls.SetColumnSpan(this.lblIndividualBridgeSpacing, 2);
+            this.lblIndividualBridgeSpacing.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold);
+            this.lblIndividualBridgeSpacing.Location = new System.Drawing.Point(3, 3);
+            this.lblIndividualBridgeSpacing.Name = "lblIndividualBridgeSpacing";
+            this.lblIndividualBridgeSpacing.Size = new System.Drawing.Size(394, 14);
+            this.lblIndividualBridgeSpacing.TabIndex = 0;
+            this.lblIndividualBridgeSpacing.Text = "Individual Bridge Spacing:";
+            this.lblIndividualBridgeSpacing.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // tlpIndividualBridgeSpacing
+            // 
+            this.tlpIndividualBridgeSpacing.AutoSize = true;
+            this.tlpIndividualBridgeSpacing.ColumnCount = 2;
+            this.tlpFixedWidthControls.SetColumnSpan(this.tlpIndividualBridgeSpacing, 2);
+            this.tlpIndividualBridgeSpacing.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 100F));
+            this.tlpIndividualBridgeSpacing.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tlpIndividualBridgeSpacing.Dock = System.Windows.Forms.DockStyle.Top;
+            this.tlpIndividualBridgeSpacing.Location = new System.Drawing.Point(3, 23);
+            this.tlpIndividualBridgeSpacing.Name = "tlpIndividualBridgeSpacing";
+            this.tlpIndividualBridgeSpacing.RowCount = 1;
+            this.tlpIndividualBridgeSpacing.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 26F));
+            this.tlpIndividualBridgeSpacing.Size = new System.Drawing.Size(394, 26);
+            this.tlpIndividualBridgeSpacing.TabIndex = 1;
+            // 
             // StringSpacingEditor
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.tlpFixedWidthControls);
             this.Controls.Add(this.tlpBridgeSpacingAuto);
             this.Controls.Add(this.tlpNutSpacingAuto);
             this.Name = "StringSpacingEditor";
@@ -223,6 +299,8 @@
             this.tlpNutSpacingAuto.PerformLayout();
             this.tlpBridgeSpacingAuto.ResumeLayout(false);
             this.tlpBridgeSpacingAuto.PerformLayout();
+            this.tlpFixedWidthControls.ResumeLayout(false);
+            this.tlpFixedWidthControls.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -252,5 +330,10 @@
         private Localization.LocalizableStringList LocStrings;
         private Localization.LocalizableString Text_Spacing;
         private Localization.LocalizableString Text_AvgSpacing;
+        private System.Windows.Forms.ComboBox cboStringSpacingType;
+        private System.Windows.Forms.Label lblStringSpacingType;
+        private System.Windows.Forms.TableLayoutPanel tlpFixedWidthControls;
+        private System.Windows.Forms.Label lblIndividualBridgeSpacing;
+        private System.Windows.Forms.TableLayoutPanel tlpIndividualBridgeSpacing;
     }
 }

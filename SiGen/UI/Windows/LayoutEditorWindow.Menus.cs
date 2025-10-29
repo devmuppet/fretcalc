@@ -131,6 +131,20 @@ namespace SiGen.UI
             tssbOpen_ButtonClick(sender, e);
         }
 
+        private void tsmiNew4StringBass_Click(object sender, EventArgs e)
+        {
+            var bassLayout = SILayout.GenerateDefault4StringBass();
+            var layoutDoc = new LayoutDocument(bassLayout);
+            OpenLayoutAndActivate(layoutDoc);
+        }
+
+        private void tsmiNew5StringBass_Click(object sender, EventArgs e)
+        {
+            var bassLayout = SILayout.GenerateDefault5StringBass();
+            var layoutDoc = new LayoutDocument(bassLayout);
+            OpenLayoutAndActivate(layoutDoc);
+        }
+
 		private void tssbSave_ButtonClick(object sender, EventArgs e)
 		{
 			if (CurrentLayoutDocument != null)
